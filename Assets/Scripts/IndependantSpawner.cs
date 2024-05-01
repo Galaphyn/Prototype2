@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IndependantSpawner : MonoBehaviour
@@ -24,9 +22,16 @@ public class IndependantSpawner : MonoBehaviour
         if (numEnemy < maxEnemy && Time.time > timer)
         {
             newEnemy = Instantiate(enemyType);
+            EnemyLogic enemyLogic = newEnemy.GetComponent<EnemyLogic>();
+            enemyLogic.setSpawner(gameObject);
             numEnemy++;
             newEnemy.transform.position = transform.position;
             timer = Time.time + spawnCooldown;
         }
+    }
+
+    public void destroyEnemy()
+    {
+        numEnemy--;
     }
 }
